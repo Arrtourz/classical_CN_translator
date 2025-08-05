@@ -1,0 +1,278 @@
+/* 翻译图标样式 */
+#translate-icon {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  user-select: none !important;
+  -webkit-user-select: none !important;
+  -moz-user-select: none !important;
+  -ms-user-select: none !important;
+}
+
+#translate-icon:hover {
+  background: #3367d6 !important;
+  transform: scale(1.1) !important;
+}
+
+#translate-icon:active {
+  transform: scale(0.95) !important;
+}
+
+/* 翻译弹窗样式 */
+#translate-popup {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif !important;
+  line-height: 1.5 !important;
+  animation: fadeInUp 0.2s ease-out !important;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+#translate-popup h3 {
+  font-weight: 600 !important;
+}
+
+#translate-popup #close-popup {
+  transition: color 0.2s ease !important;
+}
+
+#translate-popup #close-popup:hover {
+  color: #333 !important;
+}
+
+/* 原文样式已移除 */
+
+#translate-popup #translated-text {
+  border: none !important;
+  height: calc(100% - 32px) !important;
+  overflow-y: auto !important;
+  cursor: text !important;
+  user-select: text !important;
+  padding: 10px 16px !important;
+}
+
+#translate-popup #popup-header {
+  padding: 0 16px !important;
+}
+
+/* 确保样式不被网站样式覆盖 */
+#translate-icon * {
+  box-sizing: border-box !important;
+}
+
+#translate-popup * {
+  box-sizing: border-box !important;
+  margin: 0 !important;
+}
+
+/* 重置padding，但允许特定元素保持自己的padding */
+#translate-popup *:not(#translated-text):not(#popup-header) {
+  padding: 0 !important;
+}
+
+#translate-popup div {
+  margin: 0 !important;
+}
+
+#translate-popup h3 {
+  margin: 0 !important;
+}
+
+/* 滚动条美化 */
+#translate-popup #translated-text::-webkit-scrollbar {
+  width: 4px !important;
+}
+
+#translate-popup #translated-text::-webkit-scrollbar-track {
+  background: #f1f1f1 !important;
+  border-radius: 2px !important;
+}
+
+#translate-popup #translated-text::-webkit-scrollbar-thumb {
+  background: #c1c1c1 !important;
+  border-radius: 2px !important;
+}
+
+#translate-popup #translated-text::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8 !important;
+}
+
+/* 流式传输效果 */
+#translate-popup #translated-text {
+  transition: border-right 0.1s ease !important;
+}
+
+/* 打字机效果的光标 */
+@keyframes blink {
+  0%, 50% { 
+    border-right-color: #4285f4; 
+  }
+  51%, 100% { 
+    border-right-color: transparent; 
+  }
+}
+
+#translate-popup #translated-text.streaming {
+  border-right: 2px solid #4285f4 !important;
+  animation: blink 1s infinite !important;
+}
+
+/* 加载状态的文本透明度 */
+#translate-popup #translated-text.loading {
+  opacity: 0.7 !important;
+  font-style: italic !important;
+}
+
+/* 极简拖拽和缩放样式 */
+#translate-popup {
+  min-width: 200px !important;
+  max-width: 80vw !important;
+}
+
+#translate-popup #popup-header {
+  cursor: move !important;
+}
+
+#translate-popup #resize-handle-left,
+#translate-popup #resize-handle-right,
+#translate-popup #resize-handle-bottom {
+  background: transparent !important;
+}
+
+/* 拖拽时禁止选择文本 */
+#translate-popup.dragging,
+#translate-popup.resizing {
+  user-select: none !important;
+}
+
+/* Markdown样式 */
+#translate-popup #translated-text h1,
+#translate-popup #translated-text h2,
+#translate-popup #translated-text h3 {
+  margin: 16px 0 8px 0 !important;
+  font-weight: 600 !important;
+  line-height: 1.3 !important;
+}
+
+#translate-popup #translated-text h1 {
+  font-size: 18px !important;
+  color: #1a73e8 !important;
+}
+
+#translate-popup #translated-text h2 {
+  font-size: 16px !important;
+  color: #1967d2 !important;
+}
+
+#translate-popup #translated-text h3 {
+  font-size: 14px !important;
+  color: #1557b0 !important;
+}
+
+#translate-popup #translated-text strong {
+  font-weight: 600 !important;
+  color: #202124 !important;
+}
+
+#translate-popup #translated-text em {
+  font-style: italic !important;
+  color: #5f6368 !important;
+}
+
+#translate-popup #translated-text code {
+  background: #f1f3f4 !important;
+  padding: 2px 4px !important;
+  border-radius: 3px !important;
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace !important;
+  font-size: 13px !important;
+  color: #d73a49 !important;
+}
+
+#translate-popup #translated-text pre {
+  background: #f8f9fa !important;
+  border: 1px solid #e8eaed !important;
+  border-radius: 4px !important;
+  padding: 12px !important;
+  margin: 8px 0 !important;
+  overflow-x: auto !important;
+}
+
+#translate-popup #translated-text pre code {
+  background: none !important;
+  padding: 0 !important;
+  color: #202124 !important;
+  font-size: 12px !important;
+}
+
+#translate-popup #translated-text ul,
+#translate-popup #translated-text ol {
+  margin: 8px 0 !important;
+  padding-left: 20px !important;
+}
+
+#translate-popup #translated-text li {
+  margin: 4px 0 !important;
+  line-height: 1.4 !important;
+}
+
+#translate-popup #translated-text blockquote {
+  border-left: 4px solid #1a73e8 !important;
+  margin: 8px 0 !important;
+  padding: 4px 0 4px 12px !important;
+  background: #f8f9fa !important;
+  font-style: italic !important;
+  color: #5f6368 !important;
+}
+
+#translate-popup #translated-text a {
+  color: #1a73e8 !important;
+  text-decoration: none !important;
+}
+
+#translate-popup #translated-text a:hover {
+  text-decoration: underline !important;
+}
+
+/* Reasoning内容样式（淡色显示） */
+#translate-popup #translated-text .reasoning-content {
+  color: #9aa0a6 !important;
+  font-size: 12px !important;
+  line-height: 1.3 !important;
+  font-style: italic !important;
+  margin-bottom: 12px !important;
+}
+
+#translate-popup #translated-text .reasoning-content h1,
+#translate-popup #translated-text .reasoning-content h2,
+#translate-popup #translated-text .reasoning-content h3 {
+  color: #9aa0a6 !important;
+  font-size: inherit !important;
+}
+
+#translate-popup #translated-text .reasoning-content strong {
+  color: #80868b !important;
+}
+
+#translate-popup #translated-text .reasoning-content code {
+  background: #f8f9fa !important;
+  color: #9aa0a6 !important;
+}
+
+/* 分隔线样式 */
+#translate-popup #translated-text .content-separator {
+  height: 1px !important;
+  background: #e8eaed !important;
+  margin: 12px 0 !important;
+}
+
+/* 最终答案内容样式 */
+#translate-popup #translated-text .final-content {
+  color: #202124 !important;
+}
+
