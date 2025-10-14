@@ -139,9 +139,9 @@ npm run build
 |---|---|---|
 | 截图方式 | `chrome.tabs.captureVisibleTab` | `desktopCapturer` |
 | OCR 识别 | ❌ | ✅ PP-OCRv5 |
-| AI 翻译 | ❌ | ✅ DeepSeek API |
+| AI 翻译 | ✅ | ✅ DeepSeek API |
 | 全局快捷键 | ❌ | ✅ `globalShortcut` |
-| 历史记录 | ❌ | ✅ 本地存储 |
+| 历史记录 | ✅  | ✅ 本地存储 |
 | 跨平台 | 仅浏览器 | Windows/Mac/Linux |
 
 ## 📄 许可证
