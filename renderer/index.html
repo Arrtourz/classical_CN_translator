@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>古文翻译器</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="light-theme" id="app">
+    <!-- 自定义标题栏 -->
+    <div class="custom-titlebar" id="customTitlebar">
+        <div class="titlebar-left">
+            <h1 class="app-title">古文翻译器</h1>
+            <span class="status-indicator" id="statusIndicator">
+                <span class="status-dot"></span>
+            </span>
+        </div>
+        <div class="titlebar-center" id="titlebarDragArea">
+            <!-- 拖拽区域 -->
+        </div>
+        <div class="titlebar-right">
+            <!-- 应用功能按钮 -->
+            <div class="app-controls">
+                <button class="icon-btn" id="settingsBtn" title="设置">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M19.14,12.94c0.04-0.3,0.06-0.61,0.06-0.94c0-0.32-0.02-0.64-0.07-0.94l2.03-1.58c0.18-0.14,0.23-0.41,0.12-0.61 l-1.92-3.32c-0.12-0.22-0.37-0.29-0.59-0.22l-2.39,0.96c-0.5-0.38-1.03-0.7-1.62-0.94L14.4,2.81c-0.04-0.24-0.24-0.41-0.48-0.41 h-3.84c-0.24,0-0.43,0.17-0.47,0.41L9.25,5.35C8.66,5.59,8.12,5.92,7.63,6.29L5.24,5.33c-0.22-0.08-0.47,0-0.59,0.22L2.74,8.87 C2.62,9.08,2.66,9.34,2.86,9.48l2.03,1.58C4.84,11.36,4.82,11.69,4.82,12s0.02,0.64,0.07,0.94l-2.03,1.58 c-0.18,0.14-0.23,0.41-0.12,0.61l1.92,3.32c0.12,0.22,0.37,0.29,0.59,0.22l2.39-0.96c0.5,0.38,1.03,0.7,1.62,0.94l0.36,2.54 c0.05,0.24,0.24,0.41,0.48,0.41h3.84c0.24,0,0.43-0.17,0.47-0.41l0.36-2.54c0.59-0.24,1.13-0.56,1.62-0.94l2.39,0.96 c0.22,0.08,0.47,0,0.59-0.22l1.92-3.32c0.12-0.22,0.07-0.47-0.12-0.61L19.14,12.94z M12,15.6c-1.98,0-3.6-1.62-3.6-3.6 s1.62-3.6,3.6-3.6s3.6,1.62,3.6,3.6S13.98,15.6,12,15.6z"/>
+                    </svg>
+                </button>
+                <button class="icon-btn" id="themeToggle" title="切换主题">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36c-0.98,1.37-2.58,2.26-4.4,2.26 c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"/>
+                    </svg>
+                </button>
+                <button class="icon-btn" id="screenshotBtn" title="截图翻译 (Alt+Q)">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M21,17H7V3H21M21,1H7A2,2 0 0,0 5,3V17A2,2 0 0,0 7,19H21A2,2 0 0,0 23,17V3A2,2 0 0,0 21,1M3,5H1V21A2,2 0 0,0 3,23H19V21H3M15.96,10.29L13.21,13.83L11.25,11.47L8.5,15H19.5L15.96,10.29Z"/>
+                    </svg>
+                </button>
+            </div>
+            <!-- 窗口控制按钮 -->
+            <div class="window-controls">
+                <button class="window-btn minimize-btn" id="minimizeBtn" title="最小化">
+                    <svg width="10" height="10" viewBox="0 0 12 12" fill="currentColor">
+                        <path d="M0 6h12v1H0z"/>
+                    </svg>
+                </button>
+                <button class="window-btn maximize-btn" id="maximizeBtn" title="最大化">
+                    <svg width="10" height="10" viewBox="0 0 12 12" fill="currentColor">
+                        <path d="M1 1v10h10V1H1zm9 9H2V2h8v8z"/>
+                    </svg>
+                </button>
+                <button class="window-btn close-btn" id="closeBtn" title="关闭">
+                    <svg width="10" height="10" viewBox="0 0 12 12" fill="currentColor">
+                        <path d="M1 1l10 10M11 1L1 11" stroke="currentColor" stroke-width="1.2" fill="none"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 主界面 -->
+    <div class="main-container" id="mainContainer">
+
+        <!-- 翻译区域 -->
+        <div class="translation-area">
+            <!-- 输入区域 -->
+            <div class="input-section">
+                <div class="section-header">
+                    <h3>原文</h3>
+                </div>
+                <textarea
+                    id="inputText"
+                    placeholder="请输入古文内容，或使用 Alt+Q 截图识别..."
+                    rows="4"
+                    class="text-input"
+                ></textarea>
+                <div class="input-footer">
+                    <div class="input-footer-right">
+                        <button class="primary-btn translate-btn" id="translateBtn" title="翻译 (Ctrl+Enter)">
+                            <span class="btn-play">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M8 5.14v13.72L19.14 12z"/>
+                                </svg>
+                            </span>
+                            <span class="btn-stop" style="display: none;">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                    <rect x="7" y="7" width="10" height="10" rx="1.5"/>
+                                </svg>
+                            </span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 输出区域 -->
+            <div class="output-section">
+                <div class="section-header">
+                    <h3>译文</h3>
+                </div>
+                <div class="output-container">
+                    <div class="output-placeholder" id="outputPlaceholder">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="currentColor" opacity="0.3">
+                            <path d="M12.87,15.07L10.33,12.56L10.36,12.53C12.1,10.59 13.34,8.36 14.07,6H17V4H10V2H8V4H1V6H12.17C11.5,7.92 10.44,9.75 9,11.35C8.07,10.32 7.3,9.19 6.69,8H4.69C5.42,9.63 6.42,11.17 7.67,12.56L2.58,17.58L4,19L9,14L12.11,17.11L12.87,15.07Z"/>
+                        </svg>
+                        <p>翻译结果将在这里显示</p>
+                    </div>
+                    <div class="output-content" id="outputContent" style="display: none;">
+                        <div class="translation-result" id="translationResult"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 设置面板 -->
+    <div class="settings-panel" id="settingsPanel" style="display: none;">
+        <div class="settings-header">
+            <h2>设置</h2>
+            <button class="icon-btn" id="closeSettingsBtn">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z"/>
+                </svg>
+            </button>
+        </div>
+        
+        <div class="settings-content">
+            <!-- API设置 -->
+            <div class="setting-group">
+                <h3>API 配置</h3>
+                <div class="setting-item">
+                    <label for="apiKeyInput">DeepSeek API 密钥</label>
+                    <div class="input-group">
+                        <input type="password" id="apiKeyInput" placeholder="sk-...">
+                        <button class="small-btn" id="testApiBtn">测试</button>
+                    </div>
+                    <div class="setting-help">
+                        请前往 <a href="https://platform.deepseek.com/" id="deepseekLink">DeepSeek Platform</a> 获取API密钥
+                    </div>
+                </div>
+            </div>
+
+            <!-- 翻译设置 -->
+            <div class="setting-group">
+                <h3>翻译选项</h3>
+                <div class="setting-item">
+                    <label for="modelSelect">翻译模型</label>
+                    <select id="modelSelect">
+                        <option value="chat">标准模式 (deepseek-chat)</option>
+                        <option value="reasoner">推理模式 (deepseek-reasoner)</option>
+                    </select>
+                </div>
+                <div class="setting-item">
+                    <label for="languageSelect">输出语言</label>
+                    <select id="languageSelect">
+                        <option value="chinese">中文</option>
+                        <option value="english">English</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- OCR设置 -->
+            <div class="setting-group">
+                <h3>OCR 设置</h3>
+                <div class="setting-item">
+                    <label for="textLayoutSelect">文本布局</label>
+                    <select id="textLayoutSelect">
+                        <option value="horizontal">横排文本 (左向右)</option>
+                        <option value="vertical">竖排文本 (右向左，古籍)</option>
+                    </select>
+                    <div class="setting-help">竖排模式适用于古籍文献，文本框顺序从右向左排列</div>
+                </div>
+            </div>
+
+            <!-- 功能开关 -->
+            <div class="setting-group">
+                <h3>功能选项</h3>
+                <div class="setting-item">
+                    <label class="switch-label">
+                        <input type="checkbox" id="enableHistoryToggle">
+                        <span class="switch"></span>
+                        记忆功能
+                    </label>
+                    <div class="setting-help">保持对话上下文记忆（最多16000 tokens）</div>
+                </div>
+                <div class="setting-item">
+                    <label class="switch-label">
+                        <input type="checkbox" id="autoTranslateToggle">
+                        <span class="switch"></span>
+                        自动翻译
+                    </label>
+                    <div class="setting-help">输入文本后自动开始翻译</div>
+                </div>
+            </div>
+
+            <!-- 底部操作区 -->
+            <div style="margin-top: auto; padding: 16px; border-top: 1px solid var(--border-color);">
+                <button class="small-btn danger" id="clearHistoryBtn" style="width: 100%; font-size: 12px;">清空历史记录</button>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="renderer.js"></script>
+</body>
+</html>

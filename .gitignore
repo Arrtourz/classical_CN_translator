@@ -1,0 +1,41 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+
+# User data (configs are now stored in userData)
+data/
+
+# Temporary files
+temp/
+*.tmp
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Test files
+test_*.js
+*.test.js
+
+# API keys and secrets
+.env
+.env.*
+config.json
+settings.json
+*api-key*
+*apikey*
+*secret*
+
+# Cleanup scripts
+cleanup_dist.ps1
+dist_old_backup/

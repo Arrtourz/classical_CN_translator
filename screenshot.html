@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Screenshot</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            overflow: hidden;
+            cursor: crosshair;
+            user-select: none;
+            background: rgba(0, 0, 0, 0.3);
+        }
+        #canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        #selection {
+            position: absolute;
+            border: 2px solid #00a8ff;
+            box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.5);
+            display: none;
+            pointer-events: none;
+        }
+        #info {
+            position: absolute;
+            background: rgba(0, 168, 255, 0.95);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 3px;
+            font-family: 'Segoe UI', sans-serif;
+            font-size: 13px;
+            font-weight: 500;
+            display: none;
+            pointer-events: none;
+            z-index: 1000;
+        }
+        #closeBtn {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 24px;
+            color: #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            transition: all 0.2s;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+        #closeBtn:hover {
+            background: rgba(255, 60, 60, 0.95);
+            color: white;
+            transform: translateX(-50%) scale(1.1);
+        }
+        #hint {
+            position: fixed;
+            top: 70px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 4px;
+            font-family: 'Segoe UI', sans-serif;
+            font-size: 14px;
+            z-index: 2000;
+            animation: fadeIn 0.3s;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateX(-50%) translateY(-10px); }
+            to { opacity: 1; transform: translateX(-50%) translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <canvas id="canvas"></canvas>
+    <div id="selection"></div>
+    <div id="info"></div>
+    <button id="closeBtn">×</button>
+    <div id="hint">Drag to select area • ESC to cancel</div>
+
+    <script>
+        const { ipcRenderer } = require('electron');
+
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        const selection = document.getElementById('selection');
+        const info = document.getElementById('info');
+        const closeBtn = document.getElementById('closeBtn');
+        const hint = document.getElementById('hint');
+
+        let isDrawing = false;
+        let startX = 0, startY = 0, currentX = 0, currentY = 0;
+        let scaleFactor = 1;
+
+        // 接收截图数据
+        ipcRenderer.on('init-screenshot', (event, data) => {
+            console.log('Init:', data.imageWidth, 'x', data.imageHeight);
+
+            scaleFactor = data.scaleFactor;
+
+            const img = new Image();
+            img.onload = () => {
+                canvas.width = data.imageWidth;
+                canvas.height = data.imageHeight;
+                canvas.style.width = data.screenWidth + 'px';
+                canvas.style.height = data.screenHeight + 'px';
+
+                ctx.drawImage(img, 0, 0);
+                console.log('Ready');
+
+                // 3秒后隐藏提示
+                setTimeout(() => {
+                    hint.style.opacity = '0';
+                    setTimeout(() => hint.style.display = 'none', 300);
+                }, 3000);
+            };
+            img.src = data.imageDataUrl;
+        });
+
+        // 鼠标事件
+        canvas.addEventListener('mousedown', (e) => {
+            isDrawing = true;
+            startX = e.clientX;
+            startY = e.clientY;
+            selection.style.display = 'block';
+        });
+
+        canvas.addEventListener('mousemove', (e) => {
+            if (!isDrawing) return;
+
+            currentX = e.clientX;
+            currentY = e.clientY;
+
+            const x = Math.min(startX, currentX);
+            const y = Math.min(startY, currentY);
+            const width = Math.abs(currentX - startX);
+            const height = Math.abs(currentY - startY);
+
+            selection.style.left = x + 'px';
+            selection.style.top = y + 'px';
+            selection.style.width = width + 'px';
+            selection.style.height = height + 'px';
+
+            info.style.display = 'block';
+            info.style.left = (currentX + 15) + 'px';
+            info.style.top = (currentY - 30) + 'px';
+            info.textContent = `${Math.round(width)} × ${Math.round(height)}`;
+        });
+
+        canvas.addEventListener('mouseup', (e) => {
+            if (!isDrawing) return;
+            isDrawing = false;
+
+            const width = Math.abs(currentX - startX);
+            const height = Math.abs(currentY - startY);
+
+            if (width > 20 && height > 20) {
+                // 自动确认选择
+                confirm();
+            } else {
+                // 选区太小，重置
+                selection.style.display = 'none';
+                info.style.display = 'none';
+            }
+        });
+
+        // 自动确认选择
+        async function confirm() {
+            const x = Math.min(startX, currentX);
+            const y = Math.min(startY, currentY);
+            const width = Math.abs(currentX - startX);
+            const height = Math.abs(currentY - startY);
+
+            if (width > 0 && height > 0) {
+                // 隐藏选区和提示，表示正在处理
+                selection.style.display = 'none';
+                info.style.display = 'none';
+                hint.textContent = 'Processing...';
+                hint.style.display = 'block';
+                hint.style.opacity = '1';
+
+                // 创建canvas提取选区
+                const tempCanvas = document.createElement('canvas');
+                tempCanvas.width = width * scaleFactor;
+                tempCanvas.height = height * scaleFactor;
+                const tempCtx = tempCanvas.getContext('2d');
+
+                // 从原canvas提取对应区域
+                tempCtx.drawImage(
+                    canvas,
+                    x * scaleFactor, y * scaleFactor,
+                    width * scaleFactor, height * scaleFactor,
+                    0, 0,
+                    width * scaleFactor, height * scaleFactor
+                );
+
+                // 发送到主进程
+                await ipcRenderer.invoke('save-screenshot', {
+                    imageData: tempCanvas.toDataURL('image/png'),
+                    area: {
+                        x: x * scaleFactor,
+                        y: y * scaleFactor,
+                        width: width * scaleFactor,
+                        height: height * scaleFactor
+                    }
+                });
+            }
+        }
+
+        // 取消
+        async function cancel() {
+            await ipcRenderer.invoke('cancel-screenshot');
+        }
+
+        // 关闭按钮
+        closeBtn.addEventListener('click', cancel);
+
+        // 键盘事件
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                cancel();
+            }
+        });
+    </script>
+</body>
+</html>

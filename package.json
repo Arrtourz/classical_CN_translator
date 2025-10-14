@@ -1,0 +1,77 @@
+{
+  "name": "classical-cn-translator-app",
+  "version": "1.0.0",
+  "description": "Ancient Chinese Translation App with Screenshot Functionality",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "dev": "electron . --dev",
+    "build": "electron-builder",
+    "build:win": "electron-builder --win --dir",
+    "build:installer": "electron-builder --win nsis",
+    "build:portable": "electron-builder --win portable",
+    "dist": "electron-builder --publish=never"
+  },
+  "build": {
+    "appId": "com.classical-cn-translator.desktop",
+    "productName": "古文翻译器",
+    "directories": {
+      "output": "dist"
+    },
+    "asarUnpack": [
+      "models/**/*"
+    ],
+    "files": [
+      "**/*",
+      "!test*",
+      "!*.md",
+      "!.git*",
+      "!.gitignore",
+      "!node_modules/.cache",
+      "!dist",
+      "!temp/**/*",
+      "!data/**/*",
+      "!images/**/*",
+      "!start.bat",
+      "!SEARCH_REMOVAL_SUMMARY.md"
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": ["x64"]
+        }
+      ],
+      "icon": "assets/icon.png",
+      "requestedExecutionLevel": "asInvoker",
+      "compression": "normal"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "古文翻译器"
+    },
+    "portable": {
+      "artifactName": "古文翻译器-${version}-portable.exe"
+    }
+  },
+  "dependencies": {
+    "@gutenye/ocr-node": "^1.4.8",
+    "sharp": "^0.33.0"
+  },
+  "devDependencies": {
+    "electron": "^27.0.0",
+    "electron-builder": "^24.6.4"
+  },
+  "keywords": [
+    "screenshot",
+    "electron",
+    "desktop",
+    "chinese",
+    "translation"
+  ],
+  "author": "Your Name",
+  "license": "MIT"
+}
