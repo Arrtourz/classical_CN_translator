@@ -1,0 +1,99 @@
+{
+  "extensionName": {
+    "message": "古文翻译",
+    "description": "Extension name"
+  },
+  "extensionDescription": {
+    "message": "选中古文文本快速翻译",
+    "description": "Extension description"
+  },
+  "popupTitle": {
+    "message": "古文翻译设置",
+    "description": "Popup window title"
+  },
+  "apiKeyLabel": {
+    "message": "DeepSeek API Key",
+    "description": "API Key input label"
+  },
+  "apiKeyPlaceholder": {
+    "message": "输入你的DeepSeek API Key",
+    "description": "API Key input placeholder"
+  },
+  "apiKeyHelp": {
+    "message": "获取API Key",
+    "description": "API Key help text"
+  },
+  "translationModel": {
+    "message": "翻译模型",
+    "description": "Translation model selection label"
+  },
+  "outputLanguage": {
+    "message": "输出语言",
+    "description": "Output language selection label"
+  },
+  "outputChinese": {
+    "message": "中文",
+    "description": "Chinese output option"
+  },
+  "outputEnglish": {
+    "message": "英文",
+    "description": "English output option"
+  },
+  "modelChat": {
+    "message": "DeepSeek Chat (快速)",
+    "description": "Chat model option"
+  },
+  "modelReasoner": {
+    "message": "DeepSeek Reasoner (推理)",
+    "description": "Reasoner model option"
+  },
+  "darkMode": {
+    "message": "黑夜模式",
+    "description": "Dark mode toggle"
+  },
+  "darkModeDesc": {
+    "message": "为翻译弹窗启用深色主题",
+    "description": "Dark mode description"
+  },
+  "enableSearch": {
+    "message": "启用词条搜索",
+    "description": "Enable search toggle"
+  },
+  "searchDesc": {
+    "message": "自动搜索古文相关词条信息，提供历史背景",
+    "description": "Search feature description"
+  },
+  "enableHistory": {
+    "message": "启用上下文记忆",
+    "description": "Enable history toggle"
+  },
+  "historyDesc": {
+    "message": "关闭此功能将自动清空现有历史记录",
+    "description": "History feature description"
+  },
+
+  "supportDev": {
+    "message": "支持开发",
+    "description": "Support developer link"
+  },
+  "translationResult": {
+    "message": "翻译结果",
+    "description": "Translation result header"
+  },
+  "translating": {
+    "message": "翻译中...",
+    "description": "Translating status text"
+  },
+  "searchFailed": {
+    "message": "搜索失败，正在翻译...",
+    "description": "Search failed status text"
+  },
+  "searching": {
+    "message": "正在搜索...",
+    "description": "Searching status text"
+  },
+  "fetchHistory": {
+    "message": "📚 fetch history",
+    "description": "Fetch history status"
+  }
+}

@@ -1,0 +1,99 @@
+{
+  "extensionName": {
+    "message": "Classical Chinese Translator",
+    "description": "Extension name"
+  },
+  "extensionDescription": {
+    "message": "Select classical Chinese text for instant translation",
+    "description": "Extension description"
+  },
+  "popupTitle": {
+    "message": "Classical Chinese Translator Settings",
+    "description": "Popup window title"
+  },
+  "apiKeyLabel": {
+    "message": "DeepSeek API Key",
+    "description": "API Key input label"
+  },
+  "apiKeyPlaceholder": {
+    "message": "Enter your DeepSeek API Key",
+    "description": "API Key input placeholder"
+  },
+  "apiKeyHelp": {
+    "message": "Get API Key",
+    "description": "API Key help text"
+  },
+  "translationModel": {
+    "message": "Translation Model",
+    "description": "Translation model selection label"
+  },
+  "outputLanguage": {
+    "message": "Output Language",
+    "description": "Output language selection label"
+  },
+  "outputChinese": {
+    "message": "Chinese",
+    "description": "Chinese output option"
+  },
+  "outputEnglish": {
+    "message": "English",
+    "description": "English output option"
+  },
+  "modelChat": {
+    "message": "DeepSeek Chat (Fast)",
+    "description": "Chat model option"
+  },
+  "modelReasoner": {
+    "message": "DeepSeek Reasoner (Reasoning)",
+    "description": "Reasoner model option"
+  },
+  "darkMode": {
+    "message": "Dark Mode",
+    "description": "Dark mode toggle"
+  },
+  "darkModeDesc": {
+    "message": "Enable dark theme for translation popup",
+    "description": "Dark mode description"
+  },
+  "enableSearch": {
+    "message": "Enable Term Search",
+    "description": "Enable search toggle"
+  },
+  "searchDesc": {
+    "message": "Automatically search for related terms and historical context",
+    "description": "Search feature description"
+  },
+  "enableHistory": {
+    "message": "Enable Context Memory",
+    "description": "Enable history toggle"
+  },
+  "historyDesc": {
+    "message": "Disabling this will automatically clear existing history",
+    "description": "History feature description"
+  },
+
+  "supportDev": {
+    "message": "Support Developer",
+    "description": "Support developer link"
+  },
+  "translationResult": {
+    "message": "Translation Result",
+    "description": "Translation result header"
+  },
+  "translating": {
+    "message": "Translating...",
+    "description": "Translating status text"
+  },
+  "searchFailed": {
+    "message": "Search failed, translating...",
+    "description": "Search failed status text"
+  },
+  "searching": {
+    "message": "Searching...",
+    "description": "Searching status text"
+  },
+  "fetchHistory": {
+    "message": "📚 fetch history",
+    "description": "Fetch history status"
+  }
+}

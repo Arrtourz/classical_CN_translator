@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<svg width="240" height="170" viewBox="107 115 186 170" xmlns="http://www.w3.org/2000/svg">
+  <!--Unicode Character 'LOZENGE' (U+25CA) - Centered-->
+  <!-- First diamond (rotated 90 degrees) -->
+  <g transform="rotate(90 169 200)">
+    <path d="M231 200 L169 285 L107 200 L169 115 L231 200 ZM217 200 L169 134 L121 200 L169 266 L217 200 Z" fill="black" stroke="none" />
+  </g>
+  
+  <!-- Second diamond (rotated 90 degrees, shifted so left point is at center of first diamond) -->
+  <g transform="rotate(90 231 200)">
+    <path d="M293 200 L231 285 L169 200 L231 115 L293 200 ZM279 200 L231 134 L183 200 L231 266 L279 200 Z" fill="black" stroke="none" />
+  </g>
+</svg>
