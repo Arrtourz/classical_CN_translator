@@ -1,149 +1,143 @@
-# 🏺 古文翻译截图工具 (Classical Chinese Translator)
+# 🏺 Classical Chinese Translator / 古文翻译器
 
-基于 Electron + Node.js 开发的古文翻译工具套件，包含桌面应用和 Chrome 浏览器扩展，专为古文翻译场景设计。
+<div align="center">
 
-## 📦 项目组成
+**[中文文档](README.zh-CN.md) | [English Documentation](README.en.md)**
 
-本仓库包含两个独立的应用：
+A complete toolkit for Classical Chinese translation
+古文翻译工具套件
 
-### 1. 桌面应用 (Electron App)
-完整的桌面应用，支持截图、OCR 识别和 AI 翻译。
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![GitHub release](https://img.shields.io/github/v/release/Arrtourz/classical_CN_translator)](https://github.com/Arrtourz/classical_CN_translator/releases)
+[![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20macOS%20%7C%20Linux-lightgrey)](https://github.com/Arrtourz/classical_CN_translator)
 
-### 2. Chrome 浏览器扩展 (Chrome Extension)
-轻量级浏览器扩展，提供快速截图和翻译功能，位于 `chrome-extension/` 目录。
+</div>
 
 ---
 
-## ✨ 桌面应用核心功能
+## 📦 What's Included / 项目内容
 
-- 🔥 **Alt + Q** 全局快捷键截图
-- 📸 **PP-OCRv5** 高精度文字识别
-- 🤖 **DeepSeek AI** 智能翻译
-- 🎯 拖拽选择任意区域
-- 💾 本地历史记录管理
-- 🔍 搜索引擎快速查询
-- ⚡ 极简现代界面设计
-- 🚀 基于 Electron，跨平台支持
+This repository contains two independent applications:
+本仓库包含两个独立应用：
 
-## 🚀 快速开始
+### 🖥️ Desktop Application / 桌面应用
+- **Electron-based** full-featured desktop app
+  基于 Electron 的完整桌面应用
+- **PP-OCRv5** high-precision text recognition
+  PP-OCRv5 高精度文字识别
+- **DeepSeek AI** intelligent translation
+  DeepSeek AI 智能翻译
+- **Local history** management
+  本地历史记录管理
 
-### 安装依赖
+### 🌐 Chrome Extension / 浏览器扩展
+- **Lightweight** browser extension
+  轻量级浏览器扩展
+- **Quick translation** from right-click menu
+  右键菜单快速翻译
+- **Search engine** integration
+  搜索引擎集成
+
+---
+
+## ✨ Key Features / 核心功能
+
+| Feature | Desktop App | Chrome Extension |
+|---------|-------------|------------------|
+| Screenshot OCR / 截图识别 | ✅ PP-OCRv5 | ❌ |
+| AI Translation / AI翻译 | ✅ DeepSeek | ❌ |
+| Global Hotkey / 全局快捷键 | ✅ Alt+Q | ❌ |
+| History Records / 历史记录 | ✅ | ❌ |
+| Quick Search / 快速搜索 | ✅ | ✅ |
+| Cross-platform / 跨平台 | ✅ Win/Mac/Linux | Browser Only |
+
+---
+
+## 📥 Download / 下载
+
+Visit the [Releases](https://github.com/Arrtourz/classical_CN_translator/releases) page to download:
+访问 [Releases](https://github.com/Arrtourz/classical_CN_translator/releases) 页面下载：
+
+- **古文翻译器 Setup 1.0.0.exe** (302MB) - Windows Installer / Windows 安装版
+- **classical_CN_translator-v1.0.0-win-unpacked.zip** (363MB) - Portable Version / 免安装版
+
+---
+
+## 🚀 Quick Start / 快速开始
+
+### Desktop App / 桌面应用
+
 ```bash
+# Install dependencies / 安装依赖
 npm install
-```
 
-### 启动应用
-```bash
+# Launch app / 启动应用
 npm start
+
+# Build installer / 构建安装包
+npm run build:installer
 ```
 
-## 📁 项目结构
+### Chrome Extension / 浏览器扩展
 
-```
-classical_CN_translator/
-├── main.js              # Electron 主进程
-├── preload.js           # 预加载脚本
-├── renderer/            # 渲染进程文件
-│   ├── index.html       # 主界面
-│   ├── renderer.js      # 主界面逻辑
-│   └── styles.css       # 样式文件
-├── screenshot.html      # 截图选择界面
-├── modules/             # 功能模块
-│   ├── ocr.js          # OCR 识别模块
-│   ├── translation.js  # 翻译模块
-│   ├── config.js       # 配置管理
-│   ├── history.js      # 历史记录
-│   └── search.js       # 搜索引擎
-├── models/              # OCR 模型文件
-│   ├── ch_PP-OCRv5_rec_server_infer.onnx
-│   └── ch_PP-OCRv5_server_det.onnx
-├── chrome-extension/    # Chrome 浏览器扩展
-│   ├── manifest.json   # 扩展配置
-│   ├── background.js   # 后台脚本
-│   ├── content.js      # 内容脚本
-│   ├── popup.html      # 弹出页面
-│   └── search_engine.js # 搜索引擎配置
-├── package.json         # 项目配置
-└── README.md            # 说明文档
-```
-
-## 🎯 使用方法
-
-1. 启动应用后可最小化主窗口
-2. 按 **Alt + Q** 触发截图功能
-3. 用鼠标拖拽选择需要截图的区域
-4. 松开鼠标后自动弹出保存对话框
-5. 选择保存位置，完成截图
-
-## ⌨️ 快捷键
-
-- **Alt + Q**: 开始截图
-- **ESC**: 取消当前截图选择
-- **鼠标拖拽**: 选择截图区域
-
-## 🔧 技术栈
-
-- **Electron**: 桌面应用框架
-- **Node.js**: 后端运行时
-- **Sharp**: 图像处理库
-- **HTML5 Canvas**: 图像裁剪
-- **ES6 Modules**: 现代 JavaScript
-
-## 📦 打包部署
-
-```bash
-# 安装打包工具
-npm install electron-builder --save-dev
-
-# 打包应用
-npm run build
-```
-
-## 🎨 设计特色
-
-- **极简界面**: 无冗余功能，专注截图核心需求
-- **现代设计**: 毛玻璃效果，渐变背景
-- **用户友好**: 清晰的操作指引和快捷键提示
-- **高性能**: 基于 Electron 和 Sharp，截图速度快
-
-## 🌐 Chrome 浏览器扩展
-
-### 安装方法
-
-1. 进入 Chrome 扩展管理页面：`chrome://extensions/`
-2. 开启"开发者模式"
-3. 点击"加载已解压的扩展程序"
-4. 选择 `chrome-extension` 文件夹
-
-### 扩展功能
-
-- 🖱️ 右键菜单快速翻译选中文本
-- 🔍 集成多个搜索引擎（百度、谷歌、必应等）
-- 📚 支持多语言翻译
-- ⚡ 轻量快速，无需安装桌面应用
-
-### 使用方法
-
-1. 在网页上选中需要翻译的文本
-2. 右键点击选中内容
-3. 选择"翻译选中文本"或搜索引擎选项
-4. 在新标签页中查看结果
+1. Open `chrome://extensions/` / 打开扩展管理页面
+2. Enable "Developer mode" / 开启"开发者模式"
+3. Click "Load unpacked" / 点击"加载已解压的扩展程序"
+4. Select `chrome-extension/` folder / 选择 `chrome-extension/` 文件夹
 
 ---
 
-## 🔄 技术对比
+## 📖 Documentation / 文档
 
-本项目包含两种实现方式：
+- [中文完整文档 (Chinese)](README.zh-CN.md)
+- [Full English Documentation](README.en.md)
 
-| 功能 | Chrome 扩展 | Electron 桌面应用 |
-|---|---|---|
-| 截图方式 | `chrome.tabs.captureVisibleTab` | `desktopCapturer` |
-| OCR 识别 | ❌ | ✅ PP-OCRv5 |
-| AI 翻译 | ✅ | ✅ DeepSeek API |
-| 全局快捷键 | ❌ | ✅ `globalShortcut` |
-| 历史记录 | ✅  | ✅ 本地存储 |
-| 跨平台 | 仅浏览器 | Windows/Mac/Linux |
+---
 
-## 📄 许可证
+## 🔧 Tech Stack / 技术栈
+
+- **Electron 27** - Desktop framework / 桌面应用框架
+- **PP-OCRv5** - OCR engine / OCR 识别引擎
+- **DeepSeek API** - AI translation / AI 翻译
+- **Sharp** - Image processing / 图像处理
+- **Node.js** - Backend runtime / 后端运行时
+
+---
+
+## ⚠️ Requirements / 使用要求
+
+- **DeepSeek API Key** required for translation features
+  翻译功能需要配置 DeepSeek API Key
+- OCR model files (165MB) included
+  包含 OCR 模型文件（165MB）
+- Stable internet connection recommended
+  建议稳定的网络连接
+
+---
+
+## 📄 License / 许可证
 
 MIT License
+
+---
+
+## 🤝 Contributing / 贡献
+
+Issues and Pull Requests are welcome!
+欢迎提交 Issue 和 Pull Request！
+
+---
+
+## 📧 Contact / 联系方式
+
+- **GitHub Issues**: [Report Issues / 报告问题](https://github.com/Arrtourz/classical_CN_translator/issues)
+- **Repository / 仓库**: [classical_CN_translator](https://github.com/Arrtourz/classical_CN_translator)
+
+---
+
+<div align="center">
+
+Made with ❤️ for Classical Chinese enthusiasts
+为古文爱好者用心打造
+
+</div>
