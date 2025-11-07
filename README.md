@@ -14,6 +14,7 @@ A complete toolkit for Classical Chinese translation
 </div>
 
 ---
+[🎬 Demo 视频 (demo.mp4)](./demo.mp4)
 
 ## 📦 What's Included / 项目内容
 
